@@ -12,6 +12,7 @@ public class Job {
     private Location location;
     private PositionType positionType;
     private CoreCompetency coreCompetency;
+    private static final String defaultMessage = "Data not available";
 
     // Add two constructors - one to initialize a unique ID and a second to initialize the
     //  other five fields. The second constructor should also call the first in order to initialize
@@ -31,7 +32,6 @@ public class Job {
     }
 
 
-
     // Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
     @Override
@@ -46,6 +46,37 @@ public class Job {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+
+    @Override
+    public String toString() {
+        if (this.name.equals("") && this.employer.toString().equals("") && this.location.toString().equals("") && this.positionType.toString().equals("") && this.coreCompetency.toString().equals("")) {
+            return "OOPS! This job does not seem to exist.";
+        } else {
+            if (this.name == "") {
+                this.name = defaultMessage;
+            }
+            if (this.employer.getValue() == "") {
+                this.employer.setValue(defaultMessage);
+            }
+            if (this.location.getValue() == "") {
+                this.location.setValue(defaultMessage);
+            }
+            if (this.positionType.toString() == "") {
+                this.positionType.setValue(defaultMessage);
+            }
+            if (this.coreCompetency.toString() == "") {
+                this.coreCompetency.setValue(defaultMessage);
+            }
+        }
+        return "\nID: " + this.id +
+                "\nName: " + this.name +
+                "\nEmployer: " + this.employer +
+                "\nLocation: " + this.location +
+                "\nPosition Type: " + this.positionType +
+                "\nCore Competency: " + this.coreCompetency + "\n";
+    }
+
 
 
     // Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
@@ -94,5 +125,6 @@ public class Job {
     public void setCoreCompetency(CoreCompetency coreCompetency) {
         this.coreCompetency = coreCompetency;
     }
+
 
 }
